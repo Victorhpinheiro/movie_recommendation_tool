@@ -1,0 +1,26 @@
+
+.mode tabs
+.import ratings.tsv ratings_tmp
+.import movies.tsv movies_tmp
+
+CREATE TABLE movies (id INTEGER NOT NULL, title TEXT, original_t TEXT, year NUMERIC, duration NUMERIC, genre TEXT, PRIMARY KEY(id));
+CREATE TABLE ratings (movie_id NUMERIC NOT NULL, rating NUMERIC, votes INTEGER, FOREIGN KEY(movie_id) REFERENCES movies(id));
+
+
+DELETE FROM movies_tmp WHERE titleType = 'short' OR titleType = 'tvEpisode' OR titleType = 'tvSeries' OR titleType = 'tvShort' OR titleType = 'tvMovie' OR titleType = 'tvMiniSeries' OR titleType = 'video' OR titleType = 'tvSpecial' OR titleType = 'videoGame' OR titleType = 'radioSeries' OR titleType = 'radioEpisode' OR titleType = 'tvPilot';
+
+UPDATE movies_tmp SET tconst = SUBSTR(tconst, 3);
+UPDATE ratings_tmp SET tconst = SUBSTR(tconst, 3);
+
+INSERT INTO movies (id, title, original_t, year, duration, genre) SELECT CAST(tconst AS INTEGER) , primaryTitle, originalTitle, startyear, runtimeMinutes, genres FROM movies_tmp;
+INSERT INTO ratings (movie_id, rating, votes) SELECT CAST(tconst AS INTEGER) , averageRating, numVotes FROM ratings_tmp;
+
+DROP TABLE movies_tmp;
+DROP TABLE ratings_tmp;
+
+
+
+
+
+
+

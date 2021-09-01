@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search Movies
+{% endblock %}
+
+{% block body %}
+<div class='back'>
+
+    <h1 class='center main'> What movie did you liked?</h1>
+</div>
+
+
+<form id='sub' class='center' action='/results' method='POST'>
+    <input autocomplete="off" autofocus name='title' placeholder='Movie' type='text'>
+    <button type='submit'>Submit</button>
+</form>
+
+<div id='movies' ></div>
+
+<!-- importing jquery for the script be dynamic-->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script>
+
+    let input = document.querySelector('input[name="title"]');
+
+    input.addEventListener('keyup', function() {
+        // send request to the route, which return a json list of movies, then a function for pass it to the anonymous function as paramenter
+        $.get('/search?title=' + input.value, function(movies) {
+          let html = '';
+          for (let id in movies)
+          {
+              let title = movies[id].title;
+              let year = movies[id].year;
+              html += '<p> - <label onclick="submitmovie(\'' + title.replace("'","\\'") + '\')">' + title + ' (' + year + ')' + '</label></p>';
+          }
+
+          document.querySelector('#movies').innerHTML = html;  
+        });
+    });
+
+    let button = document.querySelector('button');
+    
+
+    function submitmovie(title){
+        input.value = title;
+        document.getElementById("sub").submit();
+    };
+
+</script>
+{% endblock %}

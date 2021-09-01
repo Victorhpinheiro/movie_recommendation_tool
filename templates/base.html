@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <!-- making sure it accept emoticons and cellphone screens  -->
+        <meta charserk="utf-8">
+        <meta name='viewport' content="initial-scale=1, width=device-width">
+
+        <link rel="stylesheet" href="../static/style.css" media="screen" />
+
+
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <header></header>
+        <main>
+            {% block body %}
+            {% endblock %}
+        </main>
+        <footer></footer>
+    </body>
+</html>
