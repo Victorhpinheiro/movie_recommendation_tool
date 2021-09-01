@@ -1,6 +1,6 @@
 # Movie Recommendation Tool
 #### Video Demo:  https://www.youtube.com/watch?v=yqukyNsKzvk
-#### Description: One app that you input one movie and it recomends movies of same genre with high ratings and votes. I was develop with Flask and uses an SQL database to query and store the data. you can check the requirements and how to set-up in the following explanation.
+#### Description: One app that you input one movie and it recomends movies of same genre with high ratings and votes. It was develop with Flask and uses an SQLite database to query and store the data. you can check the requirements and how to set-up in the following explanation.
 
 
 ## Getting Started
