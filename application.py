@@ -1,3 +1,6 @@
+#Made by Victor Honorato Pinheiro
+# Version 1.0.0 
+
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
